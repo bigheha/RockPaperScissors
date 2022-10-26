@@ -1,4 +1,3 @@
-console.log("hello, world!");
 
 function getComputerChoice() {
     let choice = Math.round(Math.random() * (3 - 1) + 1);
