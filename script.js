@@ -7,31 +7,58 @@ function playRound(playerChoice, computerChoice) {
     playerChoice = playerChoice.toLowerCase();
     playerChoice = playerChoice.charAt(0).toUpperCase() + playerChoice.slice(1);
     
-    console.log(playerChoice);
-    console.log(computerChoice);
-
     if (playerChoice == computerChoice) {
-        return "Draw";
+        console.log("Draw");
     }
     else if (playerChoice == 'Rock') {
         if (computerChoice == 'Scissors') {
-            return "Victory! Rock beats Scissors!";
+            console.log("Victory! Rock beats Scissors!");
+            return 'won';
         } else {
-            return "Defeat! Paper beats Rock!";
+            console.log("Defeat! Paper beats Rock!");
+            return 'lost';
         }
     } else if (playerChoice == 'Paper') {
         if (computerChoice == 'Rock') {
-            return "Victory! Paper beats Rock!";
+            console.log("Victory! Paper beats Rock!");
+            return 'won';
         } else {
-            return "Defeat! Scissors beat Paper!"
+            console.log("Defeat! Scissors beat Paper!");
+            return 'lost';
         }
     } else {
         if (computerChoice == 'Paper') {
-            return "Victory! Scissors beat Paper!"
+            console.log("Victory! Scissors beat Paper!");
+            return 'won';
         } else {
-            return "Defeat! Rock beats Paper!"
+            console.log("Defeat! Rock beats Paper!");
+            return 'lost';
         }
     }
 }
 
-playRound('ROCK', getComputerChoice);
+function game() {
+    var wins = 0;
+    var loses = 0;
+
+    for (i = 0; i < 5; i++) {
+        result = playRound(prompt('Choose Rock, Paper or Scissors'), getComputerChoice());
+
+        if (result == 'won') {
+            wins++;
+        }
+        if (result == 'lost') {
+            loses++;
+        }
+    }
+
+    if (wins > loses) {
+        console.log('Player won!');
+    } else if ( loses > wins) {
+        console.log('Computer won!');
+    } else {
+        console.log("It's a draw!");
+    }
+}
+
+game();
