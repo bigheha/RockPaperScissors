@@ -1,22 +1,25 @@
-function getComputerChoice() {
-    let choice = Math.round(Math.random() * (3 - 1) + 1);
-    return choice == 1 ? "Rock" : choice == 2 ? "Paper" : "Scissors";
-}
-
 const display = document.querySelector("#display");
+const playerScore = document.querySelector("#player");
+const computerScore = document.querySelector("#computer");
+const result = document.querySelector("#result");
 
 let wins = 0;
 let loses = 0;
 let rounds = 0;
 
+function getComputerChoice() {
+  let choice = Math.round(Math.random() * (3 - 1) + 1);
+  return choice == 1 ? "Rock" : choice == 2 ? "Paper" : "Scissors";
+}
+
 function victoryCheck(){
     if (rounds == 5) {
         if (wins > loses) {
-            console.log('Player won!');
+          result.textContent = 'Player won!';
         } else if ( loses > wins) {
-            console.log('Computer won!');
+          result.textContent = 'Computer won!';
         } else {
-            console.log("It's a draw!");
+          result.textContent = "It's a draw!";
         }
     }
 }
@@ -33,31 +36,49 @@ function playRound(playerChoice, computerChoice) {
         if (computerChoice == "Scissors") {
             display.textContent = 'Victory! Rock beats Scissors!';
             wins++;
+            playerScore.textContent = `Player score: ${wins}`;
             rounds++;
             victoryCheck();
-            return "won";
+            return;
         } else {
             display.textContent = 'Defeat! Paper beats Rock!';
             loses++;
+            computerScore.textContent = `Computer score ${loses}`;
             rounds++;
             victoryCheck();
-            return "lost";
+            return;
     }
     } else if (playerChoice == "Paper") {
         if (computerChoice == "Rock") {
-            console.log("Victory! Paper beats Rock!");
-            return "won";
+            display.textContent = "Victory! Paper beats Rock!";
+            wins++;
+            playerScore.textContent = `Player score: ${wins}`;
+            rounds++;
+            victoryCheck();
+            return;
         } else {
-            console.log("Defeat! Scissors beat Paper!");
-            return "lost";
+            display.textContent = "Defeat! Scissors beat Paper!";
+            loses++;
+            computerScore.textContent = `Computer score ${loses}`;
+            rounds++;
+            victoryCheck();
+            return;
     }
     } else {
         if (computerChoice == "Paper") {
-            console.log("Victory! Scissors beat Paper!");
-            return "won";
+            display.textContent = "Victory! Scissors beat Paper!";
+            wins++;
+            playerScore.textContent = `Player score: ${wins}`;
+            rounds++;
+            victoryCheck();
+            return;
     } else {
-            console.log("Defeat! Rock beats Scissors!");
-            return "lost";
+            display.textContent = "Defeat! Rock beats Scissors!";
+            loses++;
+            computerScore.textContent = `Computer score ${loses}`;
+            rounds++;
+            victoryCheck();
+            return;
     }
     }
 }
@@ -69,18 +90,6 @@ function game() {
     button.addEventListener("click", () =>
         playRound(button.textContent, getComputerChoice())
         ))
-    // for (i = 0; i < 5; i++) {
-    //     result = playRound(prompt('Choose Rock, Paper or Scissors'), getComputerChoice());
-
-    //     if (result == 'won') {
-    //         wins++;
-    //     }
-    //     if (result == 'lost') {
-    //         loses++;
-    //     }
-    // }
-
-
 }
 
 game();
